@@ -44,9 +44,11 @@ const [
   <div className={styles.container}>
     <main>
       <div className={styles.post}>
-        <PostDate post={post} />
-        <PostTags post={post} />
         <PostTitle post={post} enableLink={false} />
+        <div className={styles.postTagDate}>
+          <PostDate post={post} />
+          <PostTags post={post} />
+        </div>
         <PostBody blocks={blocks} />
 
         <footer>
