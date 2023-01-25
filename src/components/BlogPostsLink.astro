@@ -28,6 +28,7 @@ const { heading, posts } = Astro.props
 
 <style>
   .blog-posts-link {
+    margin-bottom: 25px;
   }
   .blog-posts-link h3 {
     margin: 0;
@@ -42,18 +43,6 @@ const { heading, posts } = Astro.props
     position: relative;
     font-size: 0.95rem;
     padding: 0.4rem 0;
-    padding-left: 0.7rem;
     line-height: 1.2rem;
-  }
-  .blog-posts-link ul li:before {
-    border-radius: 50%;
-    width: 5px;
-    height: 5px;
-    display: block;
-    position: absolute;
-    left: 0;
-    top: 0.9rem;
-    content: '';
-    background: #333;
   }
 </style>

@@ -1,9 +1,7 @@
 ---
 import * as interfaces from '../../lib/interfaces.ts'
 import {
-  getPosts,
   getAllPosts,
-  getRankedPosts,
   getPostBySlug,
   getPostsByTag,
   getAllTags,
@@ -33,14 +31,10 @@ if (!post) {
 
 const [
   blocks,
-  rankedPosts,
-  recentPosts,
   tags,
   postsHavingSameTag,
 ] = await Promise.all([
   getAllBlocksByBlockId(post.PageId),
-  getRankedPosts(),
-  getPosts(5),
   getAllTags(),
   getPostsByTag(post.Tags[0]),
 ])
@@ -61,11 +55,8 @@ const [
     </main>
 
     <aside>
-      <BlogPostsLink heading="Posts in the same category" posts={postsHavingSameTag.filter((p: interfaces.Post) => p.Slug !== post.Slug)} />
-      <BlogPostsLink heading="Recommended" posts={rankedPosts} />
-      <BlogPostsLink heading="Latest posts" posts={recentPosts} />
-      <BlogTagsLink heading="Categories" tags={tags} />
       <BlogPostsLink heading={"⚑ " + post.Tags[0]} posts={postsHavingSameTag.filter((p: interfaces.Post) => p.Slug !== post.Slug).slice(0, 6)} />
+      <BlogTagsLink heading="⚑ Tags" tags={tags} />
     </aside>
   </div>
 </Layout>

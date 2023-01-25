@@ -12,7 +12,6 @@ import PostTitle from '../../components/PostTitle.astro'
 import PostFeaturedImage from '../../components/PostFeaturedImage.astro'
 import PostExcerpt from '../../components/PostExcerpt.astro'
 import ReadMoreLink from '../../components/ReadMoreLink.astro'
-import BlogPostsLink from '../../components/BlogPostsLink.astro'
 import BlogTagsLink from '../../components/BlogTagsLink.astro'
 import styles from '../../styles/blog.module.css'
 
@@ -41,8 +40,7 @@ const [posts, rankedPosts, tags] = await Promise.all([
     </main>
 
     <aside>
-      <BlogPostsLink heading="Recommended" posts={rankedPosts} />
-      <BlogTagsLink heading="Categories" tags={tags} />
+      <BlogTagsLink heading="⚑ Tags" tags={tags} />
     </aside>
   </div>
 </Layout>
