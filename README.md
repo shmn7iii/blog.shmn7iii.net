@@ -1,6 +1,6 @@
-## shmn7iii blog
+## shmn7iii.net
 
-https://www.shmn7iii.net
+https://blog2.shmn7iii.net
 
 Fork from [astro-notion-blog](https://github.com/otoyo/astro-notion-blog).
 
