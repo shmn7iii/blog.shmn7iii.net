@@ -4,6 +4,7 @@ import {
   PUBLIC_SITE_DESCRIPTION,
   PUBLIC_GA_TRACKING_ID,
 } from '../server-constants.ts'
+import Footer from '../components/Footer.astro'
 import '../styles/syntax-coloring.css'
 import GoogleAnalytics from '../components/GoogleAnalytics.astro'
 
@@ -65,12 +66,7 @@ const navItems = [
     <div class="container">
       <slot />
     </div>
-    <footer class="footer">
-      <div>
-        <span>Powered by </span>
-        <a href="https://github.com/otoyo/astro-notion-blog">astro-notion-blog</a>
-      </div>
-    </footer>
+    <Footer />
   </body>
 </html>
 
@@ -110,18 +106,6 @@ const navItems = [
   .container {
     width: 100%;
     padding: 0 5%;
-  }
-
-  .footer {
-    margin: 40px 0 10px;
-    text-align: center;
-    font-size: 0.75rem;
-  }
-  .footer span {
-    color: #777;
-  }
-  .footer span a {
-    color: inherit;
   }
 </style>
 
