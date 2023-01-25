@@ -1,9 +1,7 @@
 ---
 import * as interfaces from '../../lib/interfaces.ts'
 import {
-  getPosts,
   getAllPosts,
-  getRankedPosts,
   getPostBySlug,
   getPostsByTag,
   getAllTags,
@@ -17,6 +15,7 @@ import PostTitle from '../../components/PostTitle.astro'
 import PostBody from '../../components/PostBody.astro'
 import BlogPostsLink from '../../components/BlogPostsLink.astro'
 import BlogTagsLink from '../../components/BlogTagsLink.astro'
+import AsideInfo from '../../components/AsideInfo.astro'
 import styles from '../../styles/blog.module.css'
 
 export async function getStaticPaths() {
@@ -33,16 +32,12 @@ if (!post) {
 
 const [
   blocks,
-  rankedPosts,
-  recentPosts,
   tags,
   postsHavingSameTag,
 ] = await Promise.all([
   getAllBlocksByBlockId(post.PageId),
-  getRankedPosts(),
-  getPosts(5),
   getAllTags(),
-  getPostsByTag(post.Tags[0], 6),
+  getPostsByTag(post.Tags[0]),
 ])
 ---
 
@@ -50,9 +45,11 @@ const [
   <div className={styles.container}>
     <main>
       <div className={styles.post}>
-        <PostDate post={post} />
-        <PostTags post={post} />
         <PostTitle post={post} enableLink={false} />
+        <div className={styles.postTagDate}>
+          <PostDate post={post} />
+          <PostTags post={post} />
+        </div>
         <PostBody blocks={blocks} />
 
         <footer>
@@ -61,10 +58,9 @@ const [
     </main>
 
     <aside>
-      <BlogPostsLink heading="Posts in the same category" posts={postsHavingSameTag.filter((p: interfaces.Post) => p.Slug !== post.Slug)} />
-      <BlogPostsLink heading="Recommended" posts={rankedPosts} />
-      <BlogPostsLink heading="Latest posts" posts={recentPosts} />
-      <BlogTagsLink heading="Categories" tags={tags} />
+      <AsideInfo />
+      <BlogPostsLink heading={"⚑ " + post.Tags[0]} posts={postsHavingSameTag.filter((p: interfaces.Post) => p.Slug !== post.Slug).slice(0, 6)} />
+      <BlogTagsLink heading="⚑ Tags" tags={tags} />
     </aside>
   </div>
 </Layout>

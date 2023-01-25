@@ -1,21 +1,21 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import * as interfaces from '../lib/interfaces.ts'
+import Layout from '../../layouts/Layout.astro'
+import * as interfaces from '../../lib/interfaces.ts'
 import {
   getAllPosts,
   getPostBySlug,
   getAllBlocksByBlockId,
-} from '../lib/notion/client.ts'
-import PostBody from '../components/PostBody.astro'
-import AsideInfo from '../components/AsideInfo.astro'
-import styles from '../styles/blog.module.css'
+} from '../../lib/notion/client.ts'
+import PostBody from '../../components/PostBody.astro'
+import AsideInfo from '../../components/AsideInfo.astro'
+import styles from '../../styles/blog.module.css'
 
 export async function getStaticPaths() {
   const posts = await getAllPosts()
   return posts.map((post: interfaces.Post) => ({ params: { slug: post.Slug }}))
 }
 
-const slug = '_root'
+const slug = '_works'
 
 const post = await getPostBySlug(slug)
 if (!post) {
@@ -27,7 +27,7 @@ const blocks = await Promise.all([
 ])
 ---
 
-<Layout>
+<Layout title="Works" path="/works">
   <div className={styles.container}>
     <main>
       <div className={styles.post}>

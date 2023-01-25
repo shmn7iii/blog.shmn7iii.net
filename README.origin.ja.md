@@ -1,4 +1,4 @@
-[English](README.md) | 日本語
+[English](README.origin.md) | 日本語
 
 # astro-notion-blog
 

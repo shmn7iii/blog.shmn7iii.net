@@ -124,11 +124,11 @@ export async function getPostBySlug(slug: string): Promise<Post|null> {
   return allPosts.find(post => post.Slug === slug) || null
 }
 
-export async function getPostsByTag(tag: string, pageSize = 10): Promise<Post[]> {
+export async function getPostsByTag(tag: string): Promise<Post[]> {
   if (!tag) return []
 
   const allPosts = await getAllPosts()
-  return allPosts.filter(post => post.Tags.includes(tag)).slice(0, pageSize)
+  return allPosts.filter(post => post.Tags.includes(tag))
 }
 
 // page starts from 1 not 0

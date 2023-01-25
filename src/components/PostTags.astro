@@ -14,7 +14,7 @@ const { post } = Astro.props
     post.Tags.length > 0 &&
     post.Tags.map((tag: string) => (
       <a href={getTagLink(tag)}>
-        {tag}
+        ⚑ {tag}
       </a>
     ))}
 </div>
@@ -24,6 +24,6 @@ const { post } = Astro.props
     font-size: 0.9rem;
   }
   .post-tags a {
-    padding-right: 0.8rem;
+    color: black;
   }
 </style>

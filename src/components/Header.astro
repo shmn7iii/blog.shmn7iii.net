@@ -1,0 +1,139 @@
+---
+export interface Props {
+  path: string
+}
+const { path = '/' } = Astro.props
+
+const navItems = [
+  { label: 'Home', path: '/' },
+  { label: 'News', path: '/news' },
+  { label: 'Works', path: '/works' },
+  { label: 'Blog', path: '/blog' },
+]
+---
+
+<header class="header">
+  <div class="logo">
+    <div class="logoShape">
+      <a href="/" >
+        <div>
+          <p>shmn7iii</p>
+        </div>
+      </a>
+    </div>
+    <div class="logoSubTitle">
+      {path ? (
+        <a href={"/" + path.split('/')[1]} > <p>{path.split('/')[1].charAt(0).toUpperCase() + path.split('/')[1].slice(1).toLowerCase()}</p> </a>
+      ) : (
+        null
+      )}
+    </div>
+  </div>
+
+  <div class="nav">
+    <ul>
+      {navItems.map(({ label, path: p }) => (
+        <li key={label}>
+          <a href={p} class={p === path ? 'active' : null}>{label}</a>
+        </li>
+      ))}
+    </ul>
+  </div>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px 10px 20px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid;
+  }
+  @media (max-width: 600px) {
+    .header {
+      display: block;
+      padding: 10px 10px 5px 10px;
+    }
+  }
+
+  .logo {
+    display: flex;
+  }
+
+  .logoShape {
+    width: 130px;
+    height: 40px;
+    background-color: #FFD840;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+  .logoShape p {
+    margin: 4px 0 0 0;
+    color: #333;
+    font-family: 'Fugaz One', cursive;
+    font-size: 25px;
+    font-weight: 300;
+  }
+  @media (max-width: 600px) {
+    .logoShape  {
+      position: static;
+    }
+  }
+
+  .logoSubTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  .logoSubTitle p {
+    margin: 0;
+    color: #333;
+    font-size: 25px;
+    font-weight: 700;
+  }
+  @media (max-width: 600px) {
+    .logoSubTitle  {
+      display: none;
+    }
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    margin: 0;
+  }
+  .nav ul {
+    list-style: none;
+    margin: inherit;
+    padding: 0 2px;
+    font-size: 1.1rem;
+  }
+  @media (max-width: 640px) {
+    .nav ul {
+      font-size: 1rem;
+    }
+  }
+  .nav ul li {
+    display: inline-block;
+  }
+  .nav ul li :global(a.active) {
+    color: var(--accents-3);
+  }
+  .nav a {
+    display: flex;
+    align-items: flex-end;
+    margin-right: 20px;
+    color: var(--fg);
+    font-weight: 700;
+    cursor: pointer;
+  }
+  @media (max-width: 600px) {
+    .nav  {
+      margin-top: 5px;
+    }
+  }
+</style>
