@@ -1,10 +1,8 @@
 ---
-import { NUMBER_OF_POSTS_PER_PAGE } from '../../../server-constants.ts'
 import {
   getPostsByTag,
   getRankedPosts,
   getAllTags,
-  getNumberOfPagesByTag,
 } from '../../../lib/notion/client.ts'
 import Layout from '../../../layouts/Layout.astro'
 import NoContents from '../../../components/NoContents.astro'
@@ -14,7 +12,6 @@ import PostTitle from '../../../components/PostTitle.astro'
 import PostFeaturedImage from '../../../components/PostFeaturedImage.astro'
 import PostExcerpt from '../../../components/PostExcerpt.astro'
 import ReadMoreLink from '../../../components/ReadMoreLink.astro'
-import Pagination from '../../../components/Pagination.astro'
 import BlogPostsLink from '../../../components/BlogPostsLink.astro'
 import BlogTagsLink from '../../../components/BlogTagsLink.astro'
 import styles from '../../../styles/blog.module.css'
@@ -26,11 +23,9 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params
 
-const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
-  getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE),
-  getRankedPosts(),
+const [posts, tags] = await Promise.all([
+  getPostsByTag(tag),
   getAllTags(),
-  getNumberOfPagesByTag(tag),
 ])
 ---
 
@@ -53,10 +48,6 @@ const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
             <ReadMoreLink post={post} />
           </div>
         ))}
-
-      <footer>
-        <Pagination tag={tag} currentPage={1} numberOfPages={numberOfPages} />
-      </footer>
     </main>
 
     <aside>

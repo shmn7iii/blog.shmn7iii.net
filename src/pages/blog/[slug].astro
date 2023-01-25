@@ -42,7 +42,7 @@ const [
   getRankedPosts(),
   getPosts(5),
   getAllTags(),
-  getPostsByTag(post.Tags[0], 6),
+  getPostsByTag(post.Tags[0]),
 ])
 ---
 
@@ -65,6 +65,7 @@ const [
       <BlogPostsLink heading="Recommended" posts={rankedPosts} />
       <BlogPostsLink heading="Latest posts" posts={recentPosts} />
       <BlogTagsLink heading="Categories" tags={tags} />
+      <BlogPostsLink heading={"⚑ " + post.Tags[0]} posts={postsHavingSameTag.filter((p: interfaces.Post) => p.Slug !== post.Slug).slice(0, 6)} />
     </aside>
   </div>
 </Layout>
