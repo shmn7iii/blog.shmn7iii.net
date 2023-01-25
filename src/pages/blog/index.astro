@@ -7,6 +7,7 @@ import {
 import Layout from '../../layouts/Layout.astro'
 import PostIndex from '../../components/PostIndex.astro'
 import BlogTagsLink from '../../components/BlogTagsLink.astro'
+import AsideInfo from '../../components/AsideInfo.astro'
 import styles from '../../styles/blog.module.css'
 
 const [posts, rankedPosts, tags] = await Promise.all([
@@ -24,6 +25,7 @@ const [posts, rankedPosts, tags] = await Promise.all([
     </main>
 
     <aside>
+      <AsideInfo />
       <BlogTagsLink heading="⚑ Tags" tags={tags} />
     </aside>
   </div>

@@ -6,6 +6,7 @@ import {
 import Layout from '../../../layouts/Layout.astro'
 import PostIndex from '../../../components/PostIndex.astro'
 import BlogTagsLink from '../../../components/BlogTagsLink.astro'
+import AsideInfo from '../../../components/AsideInfo.astro'
 import styles from '../../../styles/blog.module.css'
 
 export async function getStaticPaths() {
@@ -28,6 +29,7 @@ const [posts, tags] = await Promise.all([
     </main>
 
     <aside>
+      <AsideInfo />
       <BlogTagsLink heading="⚑ Tags" tags={tags} />
     </aside>
   </div>

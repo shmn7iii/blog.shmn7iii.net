@@ -15,6 +15,7 @@ import PostTitle from '../../components/PostTitle.astro'
 import PostBody from '../../components/PostBody.astro'
 import BlogPostsLink from '../../components/BlogPostsLink.astro'
 import BlogTagsLink from '../../components/BlogTagsLink.astro'
+import AsideInfo from '../../components/AsideInfo.astro'
 import styles from '../../styles/blog.module.css'
 
 export async function getStaticPaths() {
@@ -57,6 +58,7 @@ const [
     </main>
 
     <aside>
+      <AsideInfo />
       <BlogPostsLink heading={"⚑ " + post.Tags[0]} posts={postsHavingSameTag.filter((p: interfaces.Post) => p.Slug !== post.Slug).slice(0, 6)} />
       <BlogTagsLink heading="⚑ Tags" tags={tags} />
     </aside>
