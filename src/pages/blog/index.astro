@@ -5,13 +5,7 @@ import {
   getAllTags,
 } from '../../lib/notion/client.ts'
 import Layout from '../../layouts/Layout.astro'
-import NoContents from '../../components/NoContents.astro'
-import PostDate from '../../components/PostDate.astro'
-import PostTags from '../../components/PostTags.astro'
-import PostTitle from '../../components/PostTitle.astro'
-import PostFeaturedImage from '../../components/PostFeaturedImage.astro'
-import PostExcerpt from '../../components/PostExcerpt.astro'
-import ReadMoreLink from '../../components/ReadMoreLink.astro'
+import PostIndex from '../../components/PostIndex.astro'
 import BlogTagsLink from '../../components/BlogTagsLink.astro'
 import styles from '../../styles/blog.module.css'
 
@@ -25,18 +19,8 @@ const [posts, rankedPosts, tags] = await Promise.all([
 <Layout title="Blog" path="/blog">
   <div className={styles.container}>
     <main>
-      {posts.length === 0 ? (
-          <NoContents contents={posts} />
-        ) : posts.map(post => (
-          <div className={styles.post} key={post.Slug}>
-            <PostDate post={post} />
-            <PostTags post={post} />
-            <PostTitle post={post} />
-            <PostFeaturedImage post={post} />
-            <PostExcerpt post={post} />
-            <ReadMoreLink post={post} />
-          </div>
-        ))}
+      <PostIndex heading="Recommended Posts" posts={rankedPosts} />
+      <PostIndex heading="All Posts" posts={posts} />
     </main>
 
     <aside>

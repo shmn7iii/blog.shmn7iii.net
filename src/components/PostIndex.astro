@@ -1,0 +1,91 @@
+---
+import { Post } from '../lib/interfaces.ts'
+import { getPostLink } from '../lib/blog-helpers.ts'
+import NoContents from './NoContents.astro'
+import PostDate from './PostDate.astro'
+import PostTags from './PostTags.astro'
+
+export interface Props {
+  heading: string
+  posts: [Post]
+}
+
+const { heading, posts } = Astro.props
+---
+<div class="postIndex">
+  <h2> {heading} </h2>
+
+  {posts.length === 0 ? (
+    <NoContents contents={posts} />
+  ) : posts.filter(post => post.Slug.match(/^(?!_).*$/)).map(post => (
+    <div class="postIndexContent" key={post.Slug}>
+      <div class="postIndexContentLeft">
+        <p class="postIndexContentTitle">
+          <a href={getPostLink(post.Slug)}>
+            {post.Title}
+          </a>
+        </p>
+      </div>
+      <div class="postIndexContentRight">
+        <PostTags post={post} />
+        <PostDate post={post} />
+      </div>
+    </div>
+  ))}
+</div>
+
+<style>
+  .postIndex {
+    margin: 5px auto 50px;
+    max-width: 800px;
+  }
+  .postIndex h2 {
+    margin: 0;
+    font-size: larger;
+    font-weight: 800;
+    border-bottom: 2px solid rgb(0, 0, 0);
+  }
+  @media (max-width: 600px) {
+    .postIndex h2 {
+      text-align: left;
+      margin-left: 0px;
+      margin-bottom: 0px;
+    }
+  }
+
+  .postIndexContent {
+    display: flex;
+    margin: 10px auto 10px;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(214, 214, 214);
+    font-weight: 500;
+  }
+  .postIndexContentLeft {
+    display: flex;
+    flex-direction: column;
+    float: left;
+  }
+  .postIndexContentRight {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    color: rgb(184, 184, 184);
+  }
+  .postIndexContentRight a {
+    font-weight: 400;
+  }
+
+  .postIndexContentTitle {
+    margin: auto 0 0;
+  }
+  .postIndexContentTitle a {
+    font-size: 1rem;
+    color: inherit;
+    font-weight: 400;
+  }
+  @media (max-width: 600px) {
+    .postIndexContentTitle a {
+      font-size: 0.9rem;
+    }
+  }
+</style>
