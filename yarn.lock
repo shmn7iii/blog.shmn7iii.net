@@ -381,6 +381,11 @@
     minimatch "^3.1.2"
     strip-json-comments "^3.1.1"
 
+"@fontsource/fugaz-one@^4.5.9":
+  version "4.5.9"
+  resolved "https://registry.yarnpkg.com/@fontsource/fugaz-one/-/fugaz-one-4.5.9.tgz#8432c6f0ce29ff2ae7207d93241b50d36efa0b6e"
+  integrity sha512-6qUCEidPtVEU4xlcud5yiYMWOyJgfr82QWndod9UaPBVrXMaHBKkMH7OCT6jzvabyDN44D2lXCNPKnzFuKXOrQ==
+
 "@gar/promisify@^1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@gar/promisify/-/promisify-1.1.3.tgz#555193ab2e3bb3b6adc3d551c9c030d9e860daf6"
