@@ -68,8 +68,6 @@ aside {
 .post :global(img) {
   max-width: 100%;
   display: inline-block;
-  border: 1px solid rgba(55, 53, 47, 0.16);
-  border-radius: 3px;
 }
 .post :global(blockquote) {
   margin: 0.6rem 0;
