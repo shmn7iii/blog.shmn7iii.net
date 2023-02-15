@@ -37,7 +37,7 @@ const [
 ] = await Promise.all([
   getAllBlocksByBlockId(post.PageId),
   getAllTags(),
-  getPostsByTag(post.Tags[0]),
+  getPostsByTag(post.Tags[0]?.name, 6),
 ])
 ---
 
@@ -45,11 +45,12 @@ const [
   <div className={styles.container}>
     <main>
       <div className={styles.post}>
-        <PostTitle post={post} enableLink={false} />
-        <div className={styles.postTagDate}>
-          <PostDate post={post} />
+        <div className={styles.postHeader}>
           <PostTags post={post} />
+          <PostTitle post={post} enableLink={false} />
+          <PostDate post={post} />
         </div>
+
         <PostBody blocks={blocks} />
 
         <footer>
@@ -59,7 +60,7 @@ const [
 
     <aside>
       <AsideInfo />
-      <BlogPostsLink heading={"⚑ " + post.Tags[0]} posts={postsHavingSameTag.filter((p: interfaces.Post) => p.Slug !== post.Slug).slice(0, 6)} />
+      <BlogPostsLink heading={"⚑ " + post.Tags[0]?.name} posts={postsHavingSameTag.filter((p: interfaces.Post) => p.Slug !== post.Slug).slice(0, 6)} />
       <BlogTagsLink heading="⚑ Tags" tags={tags} />
     </aside>
   </div>

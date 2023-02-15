@@ -93,11 +93,8 @@ aside {
   padding: 0;
   border: 0;
 }
-.postTagDate {
-  display: flex;
-  justify-content: space-between;
+.postHeader {
   color: var(--fg);
-  margin-top: 10px;
-  padding-bottom: 2px;
+  padding-bottom: 5px;
   border-bottom: 1px dashed #888;
 }

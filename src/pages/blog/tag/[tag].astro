@@ -8,10 +8,11 @@ import PostIndex from '../../../components/PostIndex.astro'
 import BlogTagsLink from '../../../components/BlogTagsLink.astro'
 import AsideInfo from '../../../components/AsideInfo.astro'
 import styles from '../../../styles/blog.module.css'
+import '../../../styles/notion-color.css'
 
 export async function getStaticPaths() {
   const allTags = await getAllTags()
-  return allTags.map((tag: string) => ({ params: { tag: tag }}))
+  return allTags.map((tag: SelectProperty) => ({ params: { tag: tag.name }}))
 }
 
 const { tag } = Astro.params
