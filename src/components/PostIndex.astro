@@ -1,7 +1,7 @@
 ---
 import { Post } from '../lib/interfaces.ts'
-import { getPostLink } from '../lib/blog-helpers.ts'
 import NoContents from './NoContents.astro'
+import PostTitle from './PostTitle.astro'
 import PostDate from './PostDate.astro'
 import PostTags from './PostTags.astro'
 
@@ -19,16 +19,10 @@ const { heading, posts } = Astro.props
     <NoContents contents={posts} />
   ) : posts.filter(post => post.Slug.match(/^(?!_).*$/)).map(post => (
     <div class="postIndexContent" key={post.Slug}>
-      <div class="postIndexContentLeft">
-        <p class="postIndexContentTitle">
-          <a href={getPostLink(post.Slug)}>
-            {post.Title}
-          </a>
-        </p>
-      </div>
-      <div class="postIndexContentRight">
-        <PostTags post={post} />
+      <PostTitle post={post} />
+      <div class="postIndexContentInfo">
         <PostDate post={post} />
+        <PostTags post={post} />
       </div>
     </div>
   ))}
@@ -54,38 +48,17 @@ const { heading, posts } = Astro.props
   }
 
   .postIndexContent {
-    display: flex;
     margin: 10px auto 10px;
-    justify-content: space-between;
     border-bottom: 1px solid rgb(214, 214, 214);
-    font-weight: 500;
   }
-  .postIndexContentLeft {
+  .postIndexContentInfo {
     display: flex;
-    flex-direction: column;
-    float: left;
+    justify-content: space-between;
+    color: rgb(184, 184, 184);
   }
   .postIndexContentRight {
     display: flex;
-    flex-direction: column;
-    text-align: right;
-    color: rgb(184, 184, 184);
-  }
-  .postIndexContentRight a {
-    font-weight: 400;
+    justify-content: flex-end;
   }
 
-  .postIndexContentTitle {
-    margin: auto 0 0;
-  }
-  .postIndexContentTitle a {
-    font-size: 1rem;
-    color: inherit;
-    font-weight: 400;
-  }
-  @media (max-width: 600px) {
-    .postIndexContentTitle a {
-      font-size: 0.9rem;
-    }
-  }
 </style>
