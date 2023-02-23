@@ -1,0 +1,7 @@
+version: "1"
+rules:
+  - base: main
+    upstream: otoyo:main
+    mergeMethod: merge
+    reviewers:
+      - shmn7iii
