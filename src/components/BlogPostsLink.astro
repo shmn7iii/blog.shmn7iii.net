@@ -20,7 +20,9 @@ const { heading, posts } = Astro.props
       <ul>
         {posts.map((post: Post) => (
           <li>
-            <a href={getPostLink(post.Slug)}>{post.Title}</a>
+            <a href={getPostLink(post.Slug)}>
+              {post.Icon.Emoji} {post.Title}
+            </a>
           </li>
         ))}
       </ul>
