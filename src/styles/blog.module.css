@@ -79,9 +79,7 @@ aside {
 .post table {
   margin: 1rem 0;
 }
-.post ul {
-  font-size: 1rem;
-}
+.post ul,
 .post ol {
   font-size: 1rem;
 }
@@ -90,6 +88,7 @@ aside {
   padding: 3px 8px 3px 8px;
 }
 .post footer {
+  margin-top: 0.5rem;
   padding: 0;
   border: 0;
 }
