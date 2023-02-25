@@ -1,8 +1,5 @@
 ---
-import {
-  getPostsByTag,
-  getAllTags,
-} from '../../../lib/notion/client.ts'
+import { getPostsByTag, getAllTags } from '../../../lib/notion/client.ts'
 import Layout from '../../../layouts/Layout.astro'
 import PostIndex from '../../../components/PostIndex.astro'
 import BlogTagsLink from '../../../components/BlogTagsLink.astro'
@@ -12,21 +9,18 @@ import '../../../styles/notion-color.css'
 
 export async function getStaticPaths() {
   const allTags = await getAllTags()
-  return allTags.map((tag: SelectProperty) => ({ params: { tag: tag.name }}))
+  return allTags.map((tag: SelectProperty) => ({ params: { tag: tag.name } }))
 }
 
 const { tag } = Astro.params
 
-const [posts, tags] = await Promise.all([
-  getPostsByTag(tag),
-  getAllTags(),
-])
+const [posts, tags] = await Promise.all([getPostsByTag(tag), getAllTags()])
 ---
 
 <Layout title={`Posts in ${tag}`} path={`/blog/tag/${tag}`}>
   <div className={styles.container}>
     <main>
-      <PostIndex heading={"⚑ " + tag} posts={posts} />
+      <PostIndex heading={'⚑ ' + tag} posts={posts} />
     </main>
 
     <aside>

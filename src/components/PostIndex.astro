@@ -12,20 +12,27 @@ export interface Props {
 
 const { heading, posts } = Astro.props
 ---
-<div class="postIndex">
-  <h2> {heading} </h2>
 
-  {posts.length === 0 ? (
-    <NoContents contents={posts} />
-  ) : posts.filter(post => post.Slug.match(/^(?!_).*$/)).map(post => (
-    <div class="postIndexContent" key={post.Slug}>
-      <PostTitle post={post} />
-      <div class="postIndexContentInfo">
-        <PostDate post={post} />
-        <PostTags post={post} />
-      </div>
-    </div>
-  ))}
+<div class="postIndex">
+  <h2>{heading}</h2>
+
+  {
+    posts.length === 0 ? (
+      <NoContents contents={posts} />
+    ) : (
+      posts
+        .filter((post) => post.Slug.match(/^(?!_).*$/))
+        .map((post) => (
+          <div class="postIndexContent" key={post.Slug}>
+            <PostTitle post={post} />
+            <div class="postIndexContentInfo">
+              <PostDate post={post} />
+              <PostTags post={post} />
+            </div>
+          </div>
+        ))
+    )
+  }
 </div>
 
 <style>
@@ -60,5 +67,4 @@ const { heading, posts } = Astro.props
     display: flex;
     justify-content: flex-end;
   }
-
 </style>
