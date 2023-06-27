@@ -3,7 +3,6 @@ import type { SelectProperty } from '../../../lib/interfaces.ts'
 import { NUMBER_OF_POSTS_PER_PAGE } from '../../../server-constants.ts'
 import {
   getPostsByTag,
-  getRankedPosts,
   getAllTags,
   getNumberOfPagesByTag,
 } from '../../../lib/notion/client.ts'
@@ -24,10 +23,8 @@ export async function getStaticPaths() {
 
 const { tag } = Astro.params
 
-const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
+const [posts, numberOfPages] = await Promise.all([
   getPostsByTag(tag, NUMBER_OF_POSTS_PER_PAGE),
-  getRankedPosts(),
-  getAllTags(),
   getNumberOfPagesByTag(tag),
 ])
 

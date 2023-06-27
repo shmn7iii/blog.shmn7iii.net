@@ -1,13 +1,9 @@
 ---
 import * as interfaces from '../../lib/interfaces.ts'
 import {
-  getPosts,
   getAllPosts,
-  getRankedPosts,
   getPostBySlug,
-  getPostsByTag,
   getBlock,
-  getAllTags,
   getAllBlocksByBlockId,
   downloadFile,
 } from '../../lib/notion/client.ts'
@@ -35,15 +31,7 @@ if (!post) {
   throw new Error('Post not found. slug: ${slug}')
 }
 
-const [blocks, allPosts, rankedPosts, recentPosts, tags, postsHavingSameTag] =
-  await Promise.all([
-    getAllBlocksByBlockId(post.PageId),
-    getAllPosts(),
-    getRankedPosts(),
-    getPosts(5),
-    getAllTags(),
-    getPostsByTag(post.Tags[0]?.name, 6),
-  ])
+const [blocks] = await Promise.all([getAllBlocksByBlockId(post.PageId)])
 
 const fileAtacchedBlocks = extractTargetBlocks('image', blocks)
   .concat(extractTargetBlocks('file', blocks))
@@ -79,10 +67,6 @@ await Promise.all(
     )
     .map((promise) => promise.then(downloadFile))
 )
-
-const currentPostIndex = allPosts.findIndex((post) => post.Slug === slug)
-const prevPost = allPosts[currentPostIndex + 1]
-const nextPost = allPosts[currentPostIndex - 1]
 
 let ogImage = ''
 if (post.FeaturedImage && post.FeaturedImage.Url) {
