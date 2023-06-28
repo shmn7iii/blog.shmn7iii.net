@@ -65,12 +65,43 @@ const { navs = true } = Astro.props
       <div />
     )
   }
+
+  {
+    navs ? (
+      <div class="nav nav-media">
+        <ul>
+          {navItemsLeft.map(({ label, path: p }) => (
+            <li>
+              <a href={p} class="nav-item">
+                {label}
+              </a>
+            </li>
+          ))}
+          {navItemsRight.map(({ label, path: p }) => (
+            <li>
+              <a href={p} class="nav-item">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <div />
+    )
+  }
 </div>
 
 <style>
   .header {
     display: flex;
     justify-content: center;
+  }
+  @media (max-width: 680px) {
+    .header {
+      display: grid;
+      place-content: center;
+    }
   }
   .logo-container {
     display: grid;
@@ -103,6 +134,11 @@ const { navs = true } = Astro.props
 
   .nav {
   }
+  @media (max-width: 680px) {
+    .nav {
+      display: none;
+    }
+  }
   .nav ul {
     margin: 10px 0px 0px 0px;
     padding: 0;
@@ -125,5 +161,14 @@ const { navs = true } = Astro.props
   }
   a.nav-item:hover {
     background-color: #f4f4f4;
+  }
+
+  .nav-media {
+    display: none;
+  }
+  @media (max-width: 680px) {
+    .nav-media {
+      display: block;
+    }
   }
 </style>
