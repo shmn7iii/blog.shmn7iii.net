@@ -9,6 +9,7 @@ const { post } = Astro.props
 ---
 
 <div class="post-excerpt">
+  <h5>✨ Article Summary by Notion AI</h5>
   <p>{post.Excerpt ? post.Excerpt : ''}</p>
 </div>
 
@@ -21,5 +22,8 @@ const { post } = Astro.props
     margin: 0;
     font-size: 1rem;
     font-weight: 200;
+  }
+  .post-excerpt h5 {
+    margin: 20px 0px 0px;
   }
 </style>
