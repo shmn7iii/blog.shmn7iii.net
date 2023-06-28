@@ -24,7 +24,7 @@ const { navs = true } = Astro.props
 <div class="header">
   {
     navs ? (
-      <div class="nav">
+      <div class="nav nav-left">
         <ul>
           {navItemsLeft.map(({ label, path: p }) => (
             <li>
@@ -50,7 +50,7 @@ const { navs = true } = Astro.props
 
   {
     navs ? (
-      <div class="nav">
+      <div class="nav nav-right">
         <ul>
           {navItemsRight.map(({ label, path: p }) => (
             <li>
@@ -133,14 +133,23 @@ const { navs = true } = Astro.props
   }
 
   .nav {
+    display: flex;
+    align-items: center;
+    width: 500px;
   }
   @media (max-width: 680px) {
     .nav {
       display: none;
+      width: auto;
     }
   }
+  .nav-left {
+    justify-content: end;
+  }
+  .nav-right {
+    justify-content: start;
+  }
   .nav ul {
-    margin: 10px 0px 0px 0px;
     padding: 0;
     list-style: none;
   }
