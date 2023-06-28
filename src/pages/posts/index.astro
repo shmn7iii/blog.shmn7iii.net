@@ -13,8 +13,8 @@ import PostTitle from '../../components/PostTitle.astro'
 import PostExcerpt from '../../components/PostExcerpt.astro'
 import Pagination from '../../components/Pagination.astro'
 import BlogTagsLink from '../../components/BlogTagsLink.astro'
+import Header from '../../components/Header.astro'
 import styles from '../../styles/blog.module.css'
-import BlogHeaderNavis from '../../components/BlogHeaderNavis.astro'
 
 const [posts, tags, numberOfPages] = await Promise.all([
   getPosts(NUMBER_OF_POSTS_PER_PAGE),
@@ -24,9 +24,10 @@ const [posts, tags, numberOfPages] = await Promise.all([
 ---
 
 <Layout title="Blog" path="/posts">
+  <div slot="header">
+    <Header />
+  </div>
   <div slot="main" class={styles.main}>
-    <BlogHeaderNavis />
-
     <BlogTagsLink heading="Categories" tags={tags} />
 
     {

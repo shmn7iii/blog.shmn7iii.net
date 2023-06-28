@@ -1,12 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro'
-import IndexHeaderNavis from '../components/IndexHeaderNavis.astro'
+import Header from '../components/Header.astro'
 import styles from '../styles/blog.module.css'
 ---
 
 <Layout path="/">
+  <div slot="header">
+    <Header />
+  </div>
   <div slot="main" class={styles.main}>
-    <IndexHeaderNavis />
     <p>way in progress...</p>
   </div>
 </Layout>

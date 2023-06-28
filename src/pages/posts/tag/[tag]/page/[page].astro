@@ -12,6 +12,7 @@ import PostTags from '../../../../../components/PostTags.astro'
 import PostTitle from '../../../../../components/PostTitle.astro'
 import PostExcerpt from '../../../../../components/PostExcerpt.astro'
 import Pagination from '../../../../../components/Pagination.astro'
+import Header from '../../../../components/Header.astro'
 import styles from '../../../../../styles/blog.module.css'
 import '../../../../../styles/notion-color.css'
 
@@ -47,6 +48,9 @@ const currentTag = posts[0].Tags.find((t) => t.name === tag)
   title={`Posts in ${tag} ${page}/${numberOfPages}`}
   path={`/posts/tag/${tag}/page/${page}`}
 >
+  <div slot="header">
+    <Header />
+  </div>
   <div slot="main" class={styles.main}>
     <header>
       <h2>

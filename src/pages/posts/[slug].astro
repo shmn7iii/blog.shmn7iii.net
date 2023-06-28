@@ -17,6 +17,7 @@ import PostDate from '../../components/PostDate.astro'
 import PostTags from '../../components/PostTags.astro'
 import PostTitle from '../../components/PostTitle.astro'
 import PostBody from '../../components/PostBody.astro'
+import Header from '../../components/Header.astro'
 import styles from '../../styles/blog.module.css'
 
 export async function getStaticPaths() {
@@ -80,6 +81,9 @@ if (post.FeaturedImage && post.FeaturedImage.Url) {
   path={getPostLink(post.Slug)}
   ogImage={ogImage}
 >
+  <div slot="header">
+    <Header />
+  </div>
   <div slot="main" class={styles.main}>
     <div class={styles.post}>
       <PostDate post={post} inSlugPage={true} />

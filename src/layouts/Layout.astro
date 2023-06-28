@@ -57,11 +57,7 @@ const siteOGImage = new URL(
     <GoogleAnalytics trackingId={PUBLIC_GA_TRACKING_ID} />
     <div class="container">
       <header>
-        <a href={getNavLink('/')}>
-          <div class="logo">
-            <a href="/"> shmn7iii.net</a>
-          </div>
-        </a>
+        <slot name="header" />
       </header>
       <main>
         <div class="content">
@@ -113,31 +109,8 @@ const siteOGImage = new URL(
   }
 
   header {
-    display: grid;
-    place-content: center;
     padding: 20px 0 20px;
-  }
-  header a {
-    margin: 2px 0 0 0;
-    font-family: 'Fugaz One', cursive;
-    font-size: 27px;
-    font-weight: 300;
-    color: black;
-  }
-  header a:hover {
-    color: black;
-  }
-  header div.logo {
-    display: grid;
-    place-content: center;
-    width: 210px;
-    height: 55px;
-    background-color: white;
-    border: 3px solid black;
-    cursor: pointer;
-  }
-  header div.logo:hover {
-    background-color: #ffd840;
+    margin: 0px 0px 50px;
   }
 
   footer {

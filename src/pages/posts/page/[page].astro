@@ -13,6 +13,7 @@ import PostTitle from '../../../components/PostTitle.astro'
 import PostExcerpt from '../../../components/PostExcerpt.astro'
 import Pagination from '../../../components/Pagination.astro'
 import BlogTagsLink from '../../../components/BlogTagsLink.astro'
+import Header from '../../../components/Header.astro'
 import styles from '../../../styles/blog.module.css'
 
 export async function getStaticPaths() {
@@ -35,6 +36,9 @@ const [posts, tags, numberOfPages] = await Promise.all([
 ---
 
 <Layout title={`Posts ${page}/${numberOfPages}`} path={`/posts/page/${page}`}>
+  <div slot="header">
+    <Header />
+  </div>
   <div slot="main" class={styles.main}>
     <BlogTagsLink heading="Categories" tags={tags} />
 
