@@ -5,6 +5,7 @@ import { getDatabase } from '../lib/notion/client.ts'
 import { getNavLink, getStaticFilePath } from '../lib/blog-helpers.ts'
 import '../styles/syntax-coloring.css'
 import GoogleAnalytics from '../components/GoogleAnalytics.astro'
+import AsideNavis from '../components/AsideNavis.astro'
 
 export interface Props {
   title: string
@@ -77,6 +78,10 @@ const siteOGImage = new URL(
       </footer>
     </div>
 
+    <aside>
+      <AsideNavis />
+    </aside>
+
     {
       ENABLE_LIGHTBOX && (
         <script src={getStaticFilePath('/scripts/fslightbox.js')} />
@@ -146,6 +151,18 @@ const siteOGImage = new URL(
   footer a {
     color: inherit;
     text-decoration: underline;
+  }
+
+  aside {
+    position: fixed;
+    top: 50%;
+    right: 10px;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  @media (max-width: 1080px) {
+    aside {
+      display: none;
+    }
   }
 </style>
 
