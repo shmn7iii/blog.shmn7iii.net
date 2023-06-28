@@ -14,6 +14,7 @@ import PostTitle from '../../../components/PostTitle.astro'
 import PostExcerpt from '../../../components/PostExcerpt.astro'
 import Pagination from '../../../components/Pagination.astro'
 import Header from '../../../components/Header.astro'
+import BlogTagsLink from '../../../components/BlogTagsLink.astro'
 import styles from '../../../styles/blog.module.css'
 import '../../../styles/notion-color.css'
 
@@ -37,9 +38,7 @@ const currentTag = posts[0].Tags.find((t) => t.name === tag)
     <Header />
   </div>
   <div slot="main" class={styles.main}>
-    <header>
-      <h2><span class={`tag ${currentTag.color}`}>{tag}</span></h2>
-    </header>
+    <BlogTagsLink heading="Posts in" tags={[currentTag]} />
 
     {
       posts.length === 0 ? (
