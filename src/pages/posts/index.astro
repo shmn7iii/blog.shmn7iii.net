@@ -14,6 +14,7 @@ import PostExcerpt from '../../components/PostExcerpt.astro'
 import Pagination from '../../components/Pagination.astro'
 import BlogTagsLink from '../../components/BlogTagsLink.astro'
 import Header from '../../components/Header.astro'
+import PageTitle from '../../components/PageTitle.astro'
 import styles from '../../styles/blog.module.css'
 
 const [posts, tags, numberOfPages] = await Promise.all([
@@ -28,6 +29,7 @@ const [posts, tags, numberOfPages] = await Promise.all([
     <Header />
   </div>
   <div slot="main" class={styles.main}>
+    <PageTitle title="All Posts" />
     <BlogTagsLink heading="Categories" tags={tags} />
 
     {
