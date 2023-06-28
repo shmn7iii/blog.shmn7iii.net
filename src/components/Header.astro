@@ -4,17 +4,18 @@ import '@fontsource-variable/josefin-sans'
 import { getNavLink } from '../lib/blog-helpers.ts'
 
 export interface Props {
-  navis: boolean
+  navs: boolean
 }
 
 const navItemsLeft = [
   { label: 'Home', path: '/' },
-  { label: 'Blog', path: '/posts' },
+  { label: 'About', path: '/about' },
 ]
 
 const navItemsRight = [
-  { label: 'About', path: '/news' },
-  { label: 'Links', path: '/works' },
+  { label: 'Blog', path: '/posts' },
+  // ↓ will redirect to bento by _redirects
+  { label: 'Links', path: '/links' },
 ]
 
 const { navs = true } = Astro.props
@@ -27,7 +28,9 @@ const { navs = true } = Astro.props
         <ul>
           {navItemsLeft.map(({ label, path: p }) => (
             <li>
-              <a href={p}>{label}</a>
+              <a href={p} class="nav-item">
+                {label}
+              </a>
             </li>
           ))}
         </ul>
@@ -51,7 +54,9 @@ const { navs = true } = Astro.props
         <ul>
           {navItemsRight.map(({ label, path: p }) => (
             <li>
-              <a href={p}>{label}</a>
+              <a href={p} class="nav-item">
+                {label}
+              </a>
             </li>
           ))}
         </ul>
@@ -106,15 +111,10 @@ const { navs = true } = Astro.props
   .nav ul li {
     display: inline-block;
   }
-  .nav li {
+  a.nav-item {
     margin: 0px 5px 0px 5px;
     padding: 5px 10px 2px 10px;
     border-radius: var(--radius);
-  }
-  .nav li:hover {
-    background-color: #f4f4f4;
-  }
-  .nav a {
     display: flex;
     align-items: flex-end;
     color: var(--fg);
@@ -122,5 +122,8 @@ const { navs = true } = Astro.props
     font-size: 1.2rem;
     font-weight: 600;
     cursor: pointer;
+  }
+  a.nav-item:hover {
+    background-color: #f4f4f4;
   }
 </style>
