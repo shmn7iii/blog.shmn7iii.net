@@ -4,18 +4,32 @@ import { getDateStr } from '../lib/blog-helpers.ts'
 
 export interface Props {
   post: Post
+  inSlugPage: boolean
 }
 
-const { post } = Astro.props
+const { post, inSlugPage = false } = Astro.props
 ---
 
-<div class="post-date">
-  {post.Date ? getDateStr(post.Date) : ''}
-</div>
+{
+  inSlugPage ? (
+    <div class="post-date-in-slug">
+      {post.Date ? getDateStr(post.Date) : ''}
+    </div>
+  ) : (
+    <div class="post-date">{post.Date ? getDateStr(post.Date) : ''}</div>
+  )
+}
 
 <style>
+  .post-date-in-slug {
+    display: grid;
+    place-content: center;
+    font-size: 1rem;
+    font-weight: bolder;
+  }
   .post-date {
-    padding: 0 0 0.3rem;
-    font-size: 0.9rem;
+    margin: 0px 0px 7px;
+    font-size: 1.1rem;
+    font-weight: bolder;
   }
 </style>
