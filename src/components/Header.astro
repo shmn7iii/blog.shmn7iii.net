@@ -59,6 +59,11 @@ const { navs = true } = Astro.props
               </a>
             </li>
           ))}
+          <li>
+            <a class="nav-item open-search-modal">
+              🔍
+            </a>
+          </li>
         </ul>
       </div>
     ) : (
@@ -182,3 +187,16 @@ const { navs = true } = Astro.props
     }
   }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    function handleKeydown(event) {
+      if (event.keyCode === 75 && event.metaKey) {
+        // Ctrl+K or Cmd+K
+        document.querySelector('.open-search-modal').click()
+      }
+    }
+
+    document.addEventListener('keydown', handleKeydown)
+  })
+</script>
