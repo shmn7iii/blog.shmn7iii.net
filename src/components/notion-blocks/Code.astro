@@ -43,7 +43,7 @@ const grammer =
               Copy
             </button>
           </div>
-          <pre><code set:html={Prism.highlight(code, grammer, language)} /></pre>
+          <pre><div><code set:html={Prism.highlight(code, grammer, language)} /></div></pre>
         </>
       )
     }
@@ -78,7 +78,7 @@ const grammer =
   .code {
     display: block;
     width: 100%;
-    margin-bottom: 0.6rem;
+    margin: 5px 0 5px;
   }
   .code > div {
     background: rgb(247, 246, 243);
@@ -126,5 +126,18 @@ const grammer =
     padding: 0;
     background: rgb(247, 246, 243) !important;
     border-radius: 0;
+  }
+  .code pre div {
+    position: relative;
+    display: inline-block;
+  }
+  .code pre div::after {
+    position: absolute;
+    top: 0;
+    left: 100%;
+    width: 1.5em;
+    height: 1px;
+    content: '';
+    font-size: 0.9rem;
   }
 </style>

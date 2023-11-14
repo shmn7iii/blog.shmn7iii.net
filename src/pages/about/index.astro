@@ -7,14 +7,8 @@ import {
   getAllBlocksByBlockId,
   downloadFile,
 } from '../../lib/notion/client.ts'
-import {
-  getPostLink,
-  filePath,
-  extractTargetBlocks,
-} from '../../lib/blog-helpers.ts'
+import { extractTargetBlocks } from '../../lib/blog-helpers.ts'
 import Layout from '../../layouts/Layout.astro'
-import PostDate from '../../components/PostDate.astro'
-import PostTags from '../../components/PostTags.astro'
 import PostTitle from '../../components/PostTitle.astro'
 import PostBody from '../../components/PostBody.astro'
 import Header from '../../components/Header.astro'
@@ -25,7 +19,7 @@ export async function getStaticPaths() {
   return posts.map((post: interfaces.Post) => ({ params: { slug: post.Slug } }))
 }
 
-const { slug } = Astro.params
+const slug = '_about'
 
 const post = await getPostBySlug(slug)
 if (!post) {
@@ -68,27 +62,15 @@ await Promise.all(
     )
     .map((promise) => promise.then(downloadFile))
 )
-
-let ogImage = ''
-if (post.FeaturedImage && post.FeaturedImage.Url) {
-  ogImage = new URL(filePath(new URL(post.FeaturedImage.Url)), Astro.site)
-}
 ---
 
-<Layout
-  title={post.Title}
-  description={post.Excerpt}
-  path={getPostLink(post.Slug)}
-  ogImage={ogImage}
->
+<Layout title="About" path="/about">
   <div slot="header">
     <Header />
   </div>
   <div slot="main" class={styles.main}>
     <div class={styles.post}>
-      <PostDate post={post} inSlugPage={true} />
       <PostTitle post={post} inSlugPage={true} />
-      <PostTags post={post} inSlugPage={true} />
       <PostBody blocks={blocks} />
     </div>
   </div>

@@ -1,58 +1,44 @@
 ---
-import { NUMBER_OF_POSTS_PER_PAGE } from '../server-constants.ts'
-import {
-  getPosts,
-  getRankedPosts,
-  getAllTags,
-  getNumberOfPages,
-} from '../lib/notion/client.ts'
+import { getRankedPosts } from '../lib/notion/client.js'
 import Layout from '../layouts/Layout.astro'
 import NoContents from '../components/NoContents.astro'
 import PostDate from '../components/PostDate.astro'
 import PostTags from '../components/PostTags.astro'
 import PostTitle from '../components/PostTitle.astro'
-import PostFeaturedImage from '../components/PostFeaturedImage.astro'
 import PostExcerpt from '../components/PostExcerpt.astro'
-import ReadMoreLink from '../components/ReadMoreLink.astro'
-import Pagination from '../components/Pagination.astro'
-import BlogPostsLink from '../components/BlogPostsLink.astro'
-import BlogTagsLink from '../components/BlogTagsLink.astro'
+import Header from '../components/Header.astro'
+import PageTitle from '../components/PageTitle.astro'
 import styles from '../styles/blog.module.css'
 
-const [posts, rankedPosts, tags, numberOfPages] = await Promise.all([
-  getPosts(NUMBER_OF_POSTS_PER_PAGE),
-  getRankedPosts(),
-  getAllTags(),
-  getNumberOfPages(),
-])
+const [rankedPosts] = await Promise.all([getRankedPosts()])
 ---
 
-<Layout>
+<Layout title="Home" path="/posts">
+  <div slot="header">
+    <Header />
+  </div>
   <div slot="main" class={styles.main}>
+    <PageTitle title="Recommended" />
+
     {
-      posts.length === 0 ? (
-        <NoContents contents={posts} />
+      rankedPosts.length === 0 ? (
+        <NoContents contents={rankedPosts} />
       ) : (
-        posts.map((post) => (
-          <div class={styles.post} key={post.Slug}>
-            <PostDate post={post} />
-            <PostTags post={post} />
-            <PostTitle post={post} />
-            <PostFeaturedImage post={post} />
-            <PostExcerpt post={post} />
-            <ReadMoreLink post={post} />
-          </div>
-        ))
+        rankedPosts
+          .filter((post) => post.Slug.match(/^(?!_).*$/))
+          .map((post) => (
+            <div class={styles.posts} key={post.Slug}>
+              <div class={styles.posts_right_pane}>
+                <PostDate post={post} />
+                <PostTags post={post} />
+              </div>
+              <div class={styles.posts_left_pane}>
+                <PostTitle post={post} />
+                <PostExcerpt post={post} />
+              </div>
+            </div>
+          ))
       )
     }
-
-    <footer>
-      <Pagination currentPage={1} numberOfPages={numberOfPages} />
-    </footer>
-  </div>
-
-  <div slot="aside" class={styles.aside}>
-    <BlogPostsLink heading="Recommended" posts={rankedPosts} />
-    <BlogTagsLink heading="Categories" tags={tags} />
   </div>
 </Layout>

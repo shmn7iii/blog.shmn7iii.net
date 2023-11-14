@@ -1,15 +1,33 @@
-.main header {
-  padding: 0 0 20px;
+.main header h2 {
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 500;
 }
+
 .main footer {
-  border-top: 1px dashed #888;
-  margin: 0 auto;
-  padding: 40px 0 0;
+  margin-top: 40px;
 }
-@media (max-width: 640px) {
-  .main footer {
-    margin: 0 auto 40px;
+
+.posts {
+  padding: 50px 0 50px;
+  display: flex;
+  border-bottom: 2px solid #ddd;
+}
+@media (max-width: 1080px) {
+  .posts {
+    display: block;
   }
+}
+
+.posts_right_pane {
+  order: 1;
+  width: 300px;
+  padding: 10px 0px;
+}
+
+.posts_left_pane {
+  flex: 1;
+  order: 2;
 }
 
 .post {

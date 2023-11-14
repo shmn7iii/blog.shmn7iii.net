@@ -1,0 +1,184 @@
+---
+import '@fontsource/fugaz-one'
+import '@fontsource-variable/josefin-sans'
+import { getNavLink } from '../lib/blog-helpers.ts'
+
+export interface Props {
+  navs: boolean
+}
+
+const navItemsLeft = [
+  { label: 'Home', path: '/' },
+  { label: 'Blog', path: '/posts' },
+]
+
+const navItemsRight = [
+  { label: 'About', path: '/about' },
+  // ↓ will redirect to bento by _redirects
+  { label: 'Links', path: '/links' },
+]
+
+const { navs = true } = Astro.props
+---
+
+<div class="header">
+  {
+    navs ? (
+      <div class="nav nav-left">
+        <ul>
+          {navItemsLeft.map(({ label, path: p }) => (
+            <li>
+              <a href={p} class="nav-item">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <div />
+    )
+  }
+
+  <div class="logo-container">
+    <a href={getNavLink('/')}>
+      <div class="logo">
+        <a href="/"> shmn7iii.net</a>
+      </div>
+    </a>
+  </div>
+
+  {
+    navs ? (
+      <div class="nav nav-right">
+        <ul>
+          {navItemsRight.map(({ label, path: p }) => (
+            <li>
+              <a href={p} class="nav-item">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <div />
+    )
+  }
+
+  {
+    navs ? (
+      <div class="nav nav-media">
+        <ul>
+          {navItemsLeft.map(({ label, path: p }) => (
+            <li>
+              <a href={p} class="nav-item">
+                {label}
+              </a>
+            </li>
+          ))}
+          {navItemsRight.map(({ label, path: p }) => (
+            <li>
+              <a href={p} class="nav-item">
+                {label}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    ) : (
+      <div />
+    )
+  }
+</div>
+
+<style>
+  .header {
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 680px) {
+    .header {
+      display: grid;
+      place-content: center;
+    }
+  }
+  .logo-container {
+    display: grid;
+    place-content: center;
+    margin: 0px 30px 0px 30px;
+  }
+  div.logo {
+    display: grid;
+    place-content: center;
+    width: 210px;
+    height: 55px;
+    background-color: white;
+    border: 3px solid black;
+    cursor: pointer;
+  }
+  div.logo:hover {
+    background-color: #ffd840;
+  }
+  .logo a {
+    margin: 2px 0 0 0;
+    text-align: center;
+    font-family: 'Fugaz One', cursive;
+    font-size: 27px;
+    font-weight: 300;
+    color: black;
+  }
+  .logo a:hover {
+    color: black;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    width: 500px;
+  }
+  @media (max-width: 680px) {
+    .nav {
+      display: none;
+      width: auto;
+    }
+  }
+  .nav-left {
+    justify-content: end;
+  }
+  .nav-right {
+    justify-content: start;
+  }
+  .nav ul {
+    padding: 0;
+    list-style: none;
+  }
+  .nav ul li {
+    display: inline-block;
+  }
+  a.nav-item {
+    margin: 0px 5px 0px 5px;
+    padding: 5px 10px 2px 10px;
+    border-radius: var(--radius);
+    display: flex;
+    align-items: flex-end;
+    color: var(--fg);
+    font-family: 'Josefin Sans Variable', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  a.nav-item:hover {
+    background-color: #f4f4f4;
+  }
+
+  .nav-media {
+    display: none;
+  }
+  @media (max-width: 680px) {
+    .nav-media {
+      display: block;
+      padding: 20px 0 0 0;
+    }
+  }
+</style>

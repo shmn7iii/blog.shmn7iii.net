@@ -140,7 +140,7 @@ export const getTagLink = (tag: string) => {
 
 export const getPageLink = (page: number, tag: string) => {
   if (page === 1) {
-    return tag ? getTagLink(tag) : pathJoin(BASE_PATH, '/')
+    return tag ? getTagLink(tag) : pathJoin(BASE_PATH, '/posts')
   }
   return tag
     ? pathJoin(
@@ -151,6 +151,21 @@ export const getPageLink = (page: number, tag: string) => {
 }
 
 export const getDateStr = (date: string) => {
+  const months = [
+    'January',
+    'February',
+    'March',
+    'April',
+    'May',
+    'June',
+    'July',
+    'August',
+    'September',
+    'October',
+    'November',
+    'December',
+  ]
+
   const dt = new Date(date)
 
   if (date.indexOf('T') !== -1) {
@@ -162,10 +177,24 @@ export const getDateStr = (date: string) => {
     }
   }
 
-  const y = dt.getFullYear()
-  const m = ('00' + (dt.getMonth() + 1)).slice(-2)
-  const d = ('00' + dt.getDate()).slice(-2)
-  return y + '-' + m + '-' + d
+  const year = dt.getFullYear()
+  const month = months[dt.getMonth()]
+  let day = dt.getDate().toString()
+  switch (day) {
+    case '1':
+      day += 'st'
+      break
+    case '2':
+      day += 'nd'
+      break
+    case '3':
+      day += 'rd'
+      break
+    default:
+      day += 'th'
+      break
+  }
+  return month + ' ' + day + ', ' + year
 }
 
 export const buildHeadingId = (heading: Heading1 | Heading2 | Heading3) => {

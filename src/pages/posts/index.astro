@@ -1,0 +1,60 @@
+---
+import { NUMBER_OF_POSTS_PER_PAGE } from '../../server-constants.js'
+import {
+  getPosts,
+  getAllTags,
+  getNumberOfPages,
+} from '../../lib/notion/client.js'
+import Layout from '../../layouts/Layout.astro'
+import NoContents from '../../components/NoContents.astro'
+import PostDate from '../../components/PostDate.astro'
+import PostTags from '../../components/PostTags.astro'
+import PostTitle from '../../components/PostTitle.astro'
+import PostExcerpt from '../../components/PostExcerpt.astro'
+import Pagination from '../../components/Pagination.astro'
+import BlogTagsLink from '../../components/BlogTagsLink.astro'
+import Header from '../../components/Header.astro'
+import PageTitle from '../../components/PageTitle.astro'
+import styles from '../../styles/blog.module.css'
+
+const [posts, tags, numberOfPages] = await Promise.all([
+  getPosts(NUMBER_OF_POSTS_PER_PAGE),
+  getAllTags(),
+  getNumberOfPages(),
+])
+---
+
+<Layout title="Blog" path="/posts">
+  <div slot="header">
+    <Header />
+  </div>
+  <div slot="main" class={styles.main}>
+    <PageTitle title="All Posts" />
+    <BlogTagsLink heading="Categories" tags={tags} />
+
+    {
+      posts.length === 0 ? (
+        <NoContents contents={posts} />
+      ) : (
+        posts
+          .filter((post) => post.Slug.match(/^(?!_).*$/))
+          .map((post) => (
+            <div class={styles.posts} key={post.Slug}>
+              <div class={styles.posts_right_pane}>
+                <PostDate post={post} />
+                <PostTags post={post} />
+              </div>
+              <div class={styles.posts_left_pane}>
+                <PostTitle post={post} />
+                <PostExcerpt post={post} />
+              </div>
+            </div>
+          ))
+      )
+    }
+
+    <footer class={styles.main}>
+      <Pagination currentPage={1} numberOfPages={numberOfPages} />
+    </footer>
+  </div>
+</Layout>
