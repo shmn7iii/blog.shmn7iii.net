@@ -1,4 +1,4 @@
-## [www.shmn7iii.net](https://www.shmn7iii.net)
+## [blog.shmn7iii.net](https://blog.shmn7iii.net)
 
 ![OGP](/public/default-og-image.png)
 
