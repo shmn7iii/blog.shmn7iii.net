@@ -10,7 +10,6 @@ import NoContents from '../../../../../components/NoContents.astro'
 import PostDate from '../../../../../components/PostDate.astro'
 import PostTags from '../../../../../components/PostTags.astro'
 import PostTitle from '../../../../../components/PostTitle.astro'
-import PostExcerpt from '../../../../../components/PostExcerpt.astro'
 import Pagination from '../../../../../components/Pagination.astro'
 import Header from '../../../../../components/Header.astro'
 import PageTitle from '../../../../../components/PageTitle.astro'
@@ -67,7 +66,6 @@ const [posts, numberOfPages] = await Promise.all([
               </div>
               <div class={styles.posts_left_pane}>
                 <PostTitle post={post} />
-                <PostExcerpt post={post} />
               </div>
             </div>
           ))
