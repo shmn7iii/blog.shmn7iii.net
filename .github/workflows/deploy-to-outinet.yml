@@ -1,6 +1,8 @@
 name: Deploy to outinet-hosted runner
 
 on:
+  schedule:
+    - cron: '0 18 * * *' # AM 03:00 JST
   push:
     branches:
       - main
