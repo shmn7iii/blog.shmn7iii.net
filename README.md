@@ -1,4 +1,4 @@
-## [blog.shmn7iii.net](https://blog.shmn7iii.net)
+## [Kakioki](https://blog.shmn7iii.ink)
 
 ![OGP](/public/default-og-image.png)
 
