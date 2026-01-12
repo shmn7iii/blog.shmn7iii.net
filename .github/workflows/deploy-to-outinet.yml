@@ -1,39 +1,39 @@
-name: Deploy to outinet-hosted runner
+# name: Deploy to outinet-hosted runner
 
-on:
-  schedule:
-    - cron: '0 18 * * *' # AM 03:00 JST
-  push:
-    branches:
-      - main
+# on:
+#   schedule:
+#     - cron: '0 18 * * *' # AM 03:00 JST
+#   push:
+#     branches:
+#       - main
 
-jobs:
-  build-and-deploy:
-    runs-on: [outinet-hosted-runner]
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+# jobs:
+#   build-and-deploy:
+#     runs-on: [outinet-hosted-runner]
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
 
-      - name: Stop and remove containers
-        run: |
-          docker rm -f blog || true
+#       - name: Stop and remove containers
+#         run: |
+#           docker rm -f blog || true
 
-      - name: Build Docker image
-        env:
-          NOTION_API_SECRET: ${{ secrets.NOTION_API_SECRET }}
-          DATABASE_ID: ${{ secrets.DATABASE_ID }}
-        run: |
-          docker build \
-            -t blog \
-            --secret id=notion_api_secret,env=NOTION_API_SECRET \
-            --secret id=database_id,env=DATABASE_ID \
-            .
+#       - name: Build Docker image
+#         env:
+#           NOTION_API_SECRET: ${{ secrets.NOTION_API_SECRET }}
+#           DATABASE_ID: ${{ secrets.DATABASE_ID }}
+#         run: |
+#           docker build \
+#             -t blog \
+#             --secret id=notion_api_secret,env=NOTION_API_SECRET \
+#             --secret id=database_id,env=DATABASE_ID \
+#             .
 
-      - name: Run docker containers
-        run: |
-          docker run \
-            -d \
-            --name blog \
-            --restart unless-stopped \
-            -p 2347:80 \
-            blog
+#       - name: Run docker containers
+#         run: |
+#           docker run \
+#             -d \
+#             --name blog \
+#             --restart unless-stopped \
+#             -p 2347:80 \
+#             blog
